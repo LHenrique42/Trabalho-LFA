@@ -2,7 +2,7 @@ package analisadorlexico;
 
 public interface Constantes {
     
-    enum Token { WHILE, DO, IF , FOR, SWITCH, CASE, AP, FP, ACH, FCH, PTV, DPT, NEGACAO, VARIAVEL, NUMERO, OP_UN_BIN, OP_UNARIO, OP_BINARIO, IGUALDADE, CARACTERE }
+    enum Token { EOF, WHILE, DO, IF , FOR, SWITCH, CASE, AP, FP, ACH, FCH, PTV, DPT, NEGACAO, VARIAVEL, NUMERO, OP_UN_BIN, OP_UNARIO, OP_BINARIO, IGUALDADE, CARACTERE }
     
     String  WHILE = "while",
             DO = "do",
@@ -18,13 +18,15 @@ public interface Constantes {
             OP_UNARIO = "++--";
             
     
-    char    AP = '(',
+    char    EOF = 0,
+            AP = '(',
             FP = '(',
             ACH = '{',
             FCH = '}',
             PTV = ';',
             DPT = ':',
             NEGACAO = '!';
+    String  NOME_DEFAULT_ARQUIVO_ENTRADA = "entrada.txt";
             
     
 }

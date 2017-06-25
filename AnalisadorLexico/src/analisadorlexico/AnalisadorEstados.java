@@ -1,7 +1,16 @@
 package analisadorlexico;
 
-public class AnalisadorEstados extends AnalisadorLexico {
+public class AnalisadorEstados extends AnalisadorLexico 
+{
     
+    // Contrutor 
+    public AnalisadorEstados( String nome )
+    {
+        super(nome);
+    }
+    
+    
+    // Estados
     public void q0(){
         
         if(this.proxCaractere == 'w'){
@@ -80,6 +89,7 @@ public class AnalisadorEstados extends AnalisadorLexico {
             leProxCaractere();
             v0();
         }
+        System.out.println(proxCaractereIs(LETRA));
     }
     public void q6(){
         if(this.proxCaractere == 'f'){
@@ -224,7 +234,7 @@ public class AnalisadorEstados extends AnalisadorLexico {
             leProxCaractere();
             q22();
         }
-        else if(proxCaractereIs(LETRA) && this.proxCaractere != 'e'){
+        else if(proxCaractereIs(LETRA   ) && this.proxCaractere != 'e'){
             leProxCaractere();
             v0();
         }
