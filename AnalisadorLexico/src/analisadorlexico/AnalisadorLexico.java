@@ -23,7 +23,8 @@ public class AnalisadorLexico extends Analisador
              int c;
              while( (c = arq.read() ) != -1 )
              {
-                 System.out.println("" + (char)c);
+                // mostra leitura arquivo caractere por caractere
+                System.out.println("" + (char)c);
                 this.entrada.append( (char)c );
              }
              System.out.println("concluido");
@@ -42,16 +43,15 @@ public class AnalisadorLexico extends Analisador
         try {
             this.proxCaractere = this.entrada.charAt(this.posicao++);
         } catch (IndexOutOfBoundsException e) {
-            this.proxCaractere = EOF;
+            
+            this.proxCaractere = Constantes.EOF;
         }
     }    
 
 ////Implementar função para dizer qual o caractere lido    
     public boolean proxCaractereIs(String s)
     {
-        System.out.println(this.proxCaractere);
-        return ( s.indexOf(this.proxCaractere) != -1 );
-            
+        return ( s.indexOf(this.proxCaractere) != -1 );       
     }
     
 }

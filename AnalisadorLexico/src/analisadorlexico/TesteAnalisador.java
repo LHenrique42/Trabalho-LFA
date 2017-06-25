@@ -1,6 +1,7 @@
 
 package analisadorlexico;
 
+
 public class TesteAnalisador 
 {
     static public AnalisadorEstados scanner;

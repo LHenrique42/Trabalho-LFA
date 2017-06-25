@@ -13,7 +13,16 @@ public class AnalisadorEstados extends AnalisadorLexico
     // Estados
     public void q0(){
         
-        if(this.proxCaractere == 'w'){
+        if( this.proxCaractere == ' ')
+        {
+            this.tokenReconhecido = Constantes.Token.ESPACO;
+        }
+        else if( this.proxCaractere == EOF )
+        {
+            leProxCaractere();
+            f();
+        }
+        else if(this.proxCaractere == 'w'){
             leProxCaractere();
             q1();
         }
@@ -36,12 +45,23 @@ public class AnalisadorEstados extends AnalisadorLexico
         else if(this.proxCaractere == 'c'){
             leProxCaractere();
             q19();
-        }        
+        }
+        else if( this.proxCaractere == '(' )
+        {
+            leProxCaractere();
+            ap0();
+        }
+        else if( this.proxCaractere == ')' )
+        {
+            leProxCaractere();
+            fp0();
+        }   
         else if(this.proxCaractereIs(LETRA) && !this.proxCaractereIs(DIGITO) && this.proxCaractere != 'w' && this.proxCaractere != 'i' && this.proxCaractere != 'f' && this.proxCaractere != 'd' && this.proxCaractere != 's' && this.proxCaractere != 'c'){
             leProxCaractere();
             v0();
         }
     }
+    
 
     public void q1(){
         if(this.proxCaractere == 'h'){
@@ -88,9 +108,14 @@ public class AnalisadorEstados extends AnalisadorLexico
         if(proxCaractereIs(LETRA)){
             leProxCaractere();
             v0();
-        }
-        System.out.println(proxCaractereIs(LETRA));
+        } 
     }
+    
+    public void f()
+    {
+        this.tokenReconhecido = Token.EOF;
+    }
+    
     public void q6(){
         if(this.proxCaractere == 'f'){
             leProxCaractere();
@@ -246,7 +271,17 @@ public class AnalisadorEstados extends AnalisadorLexico
             v0();
         }
     }
-     
+
+    public void ap0()
+    {
+        this.tokenReconhecido = Token.AP;
+    }
+    
+    public void fp0()
+    {
+        this.tokenReconhecido = Token.FP;
+    }
+
     public void v0(){
         this.tokenReconhecido = Token.VARIAVEL;
         if(this.proxCaractereIs(LETRA)){
@@ -254,4 +289,5 @@ public class AnalisadorEstados extends AnalisadorLexico
             v0();
         }
     }
+   
 }
