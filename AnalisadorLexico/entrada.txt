@@ -1,1 +1,1 @@
-while(x)
+while(x>0){ case 'A': a++;}

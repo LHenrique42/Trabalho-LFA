@@ -17,13 +17,16 @@ public class ErroLexico extends RuntimeException
     public ErroLexico( char simboloEncontrado, String simbolosEsperados )
     {
         this.simboloEncontrado = simboloEncontrado;
-        this.simbolosEsperados = this.simbolosEsperados;
+        this.simbolosEsperados = simbolosEsperados;
     }
     
     public String toString()
     {
+        if(this.simbolosEsperados != null){
         return "Simbolo encontrado: " + (char)this.simboloEncontrado + 
                 "\n era(m) esperado(s):" + this.simbolosEsperados;
+        }
+        return "foda-se";
     }
     
 }

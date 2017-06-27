@@ -2,8 +2,19 @@ package analisadorlexico;
 
 public interface Constantes {
     
-    enum Token { ESPACO,EOF, WHILE, DO, IF , FOR, SWITCH, CASE, AP, FP, ACH, FCH, PTV, DPT, NEGACAO, VARIAVEL, NUMERO, OP_UN_BIN, OP_UNARIO, OP_BINARIO, IGUALDADE, CARACTERE }
-    
+    enum Token { ESPACO,EOF, WHILE, DO, IF , FOR, SWITCH, CASE, AP, FP, ACH, FCH, PTV, DPT, NEGACAO, VARIAVEL, NUMERO, OP_UN_BIN, OP_UNARIO, OP_BINARIO, IGUALDADE, ASP, CARACTERE }
+        
+    char    EOF = 0,
+            AP = '(',
+            FP = '(',
+            ACH = '{',
+            FCH = '}',
+            PTV = ';',
+            DPT = ':',
+            ESPACO = ' ',
+            NEGACAO = '!';
+            
+          
     String  WHILE = "while",
             DO = "do",
             IF = "if",
@@ -15,19 +26,12 @@ public interface Constantes {
             SINAL = "+-",
             OP_BINARIO = "*/%&&||==!=&|>><<",
             OP_UN_BIN = "+-",
-            OP_UNARIO = "++--";
+            OP_UNARIO = "++--",
+            ALFA = LETRA + DIGITO + '_',
+            ALFABETO = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+-*/%&|=!&|><(){};': " + EOF;
+            //TERMINAL = "\n\t\a";
             
-    
-    char    EOF = 0,
-            AP = '(',
-            FP = '(',
-            ACH = '{',
-            FCH = '}',
-            PTV = ';',
-            DPT = ':',
-            ESPACO = ' ',
-            NEGACAO = '!';
-            
+  
     String  NOME_DEFAULT_ARQUIVO_ENTRADA = "entrada.txt";
             
     
