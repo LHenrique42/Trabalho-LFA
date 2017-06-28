@@ -18,6 +18,11 @@ public class AnalisadorEstados extends AnalisadorLexico
             this.tokenReconhecido = Constantes.Token.ESPACO;
             leProxCaractere();
         }
+        if( proxCaractereIs(SEPARADOR))
+        {
+            this.tokenReconhecido = Constantes.Token.SEPARADOR;
+            leProxCaractere();
+        }
         else if( this.proxCaractere == EOF )
         {
             leProxCaractere();
@@ -360,11 +365,7 @@ public class AnalisadorEstados extends AnalisadorLexico
     }
     public void ach0(){
         this.tokenReconhecido = Token.ACH;
-    
-        if(!proxCaractereIs(ALFABETO)){
-            System.out.println("Entrada não reconhecida");
-            throw(new ErroLexico(this.proxCaractere,ALFABETO));
-        }
+        leProxCaractere();
     }
     public void fch0(){
         this.tokenReconhecido = Token.FCH;
