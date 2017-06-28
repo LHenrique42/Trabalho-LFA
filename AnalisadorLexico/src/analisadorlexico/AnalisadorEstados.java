@@ -237,7 +237,7 @@ public class AnalisadorEstados extends AnalisadorLexico
     public void q9(){
         if(this.proxCaractere == 'r'){
             leProxCaractere();
-            q5();
+            q10();
         }
         else if(proxCaractereIs(LETRA) && this.proxCaractere != 'r'){
             leProxCaractere();
@@ -369,11 +369,7 @@ public class AnalisadorEstados extends AnalisadorLexico
     }
     public void fch0(){
         this.tokenReconhecido = Token.FCH;
-    
-        if(!proxCaractereIs(ALFABETO)){
-            System.out.println("Entrada não reconhecida");
-            throw(new ErroLexico(this.proxCaractere,ALFABETO));
-        }
+        leProxCaractere();
     }
     public void n0(){
         this.tokenReconhecido = Token.NUMERO;
@@ -404,16 +400,13 @@ public class AnalisadorEstados extends AnalisadorLexico
     }
     public void pt0(){
         this.tokenReconhecido = Token.PTV;
-        if(!proxCaractereIs(ALFABETO)){
-            System.out.println("Entrada não reconhecida");
-            throw(new ErroLexico(this.proxCaractere,ALFABETO));
-        }
+        leProxCaractere();
     }
     
     public void ap0()
     {
         this.tokenReconhecido = Token.AP;
-        //leProxCaractere();
+        leProxCaractere();
         /*
         if(!proxCaractereIs(ALFABETO)){
             System.out.println("Entrada não reconhecida");
@@ -520,6 +513,7 @@ public class AnalisadorEstados extends AnalisadorLexico
     public void crt2()
     {
         this.tokenReconhecido = Token.CARACTERE;
+        leProxCaractere();
     }
     
     public void opu0()
