@@ -1,0 +1,5 @@
+alfa = { a,...,z,A,...Z,_}
+beta = {0,...,9}
+gama = { + , - , = , ( , ) , { , } , ; , : , > , < , % , & , | , * , !  }
+alfabeto = {alfa U beta U gama U separadores}
+separadores = { \t,\n,\a };
