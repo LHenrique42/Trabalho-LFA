@@ -15,16 +15,14 @@ public class AnalisadorEstados extends AnalisadorLexico
         
         if( this.proxCaractere == ' ')
         {
-            this.tokenReconhecido = Constantes.Token.ESPACO;
+            this.tokenReconhecido = null;
             leProxCaractere();
-//            q0();
             
         } 
         else if( proxCaractereIs(SEPARADOR))
         {
-            this.tokenReconhecido = Constantes.Token.SEPARADOR;
+            this.tokenReconhecido = null;
             leProxCaractere();
-//            q0();
         }
         else if( this.proxCaractere == EOF )
         {
@@ -394,6 +392,10 @@ public class AnalisadorEstados extends AnalisadorLexico
         if (proxCaractereIs(DIGITO)){
             leProxCaractere();
             n2();
+        }
+        else{
+            System.out.println("Entrada não reconhecida");
+            throw(new ErroLexico(this.proxCaractere,DIGITO));
         }
     }
     public void n2(){

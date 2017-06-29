@@ -1,33 +1,9 @@
-while( x> 0)
-{
-	case 'A':
-	a++;
-	x = 0;
-	if ( a > b + c )
-		c--;
-		for( x = y; x < ++y ; c += 10 )
-		{
-			a+=b;
-			(A -B) > ee;	
-			switch(variavel)
-			{
-				case 'a':
-					a++;
-				case '&':
-					b--;
-					if( (a+b) = _ && (c == u) || c >= 9)
-			}
-		}
-
-		do
-			hello = a + ( 3 &= 8 );
-		while( x && ( W - D + 5));
-			pt -= (x + 2);
-			2 % 3;
-		{{}}
-		({3});
-		
-
-	}
-
-a * ( 3 + ( x + 1 ));
+if (b - -2 < .1++++(((;2.3 && a <= b){
+        while (a <= b){
+            if ( a%2 != 0){
+                vetImpares p++ = a;
+                if (a%3 == 0)
+                    vetImp3 q++  = a;
+            }
+            a++;
+        }

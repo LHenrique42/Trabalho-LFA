@@ -29,7 +29,7 @@ public interface Constantes {
             OP_UNARIO = "++--",
             ALFA = LETRA + DIGITO ,
             ALFABETO = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+-*/%&|=!&|><(){};': " + EOF,
-            SEPARADOR = "\n\t";
+            SEPARADOR = "\n\t\r";
             
   
     String  NOME_DEFAULT_ARQUIVO_ENTRADA = "entrada.txt";
