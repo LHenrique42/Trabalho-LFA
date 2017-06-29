@@ -375,17 +375,19 @@ public class AnalisadorEstados extends AnalisadorLexico
     }
     public void ach0(){
         this.tokenReconhecido = Token.ACH;
-//        leProxCaractere();
     }
     public void fch0(){
         this.tokenReconhecido = Token.FCH;
-//        leProxCaractere();
     }
     public void n0(){
         this.tokenReconhecido = Token.NUMERO;
         if (this.proxCaractere == '.'){
             leProxCaractere();
             n1();
+        }
+        else if (this.proxCaractereIs(DIGITO)){
+            leProxCaractere();
+            n0();
         }
     }
     public void n1(){
