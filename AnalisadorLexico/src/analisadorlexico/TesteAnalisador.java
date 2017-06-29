@@ -20,7 +20,8 @@ public class TesteAnalisador
             do
             {
                 scanner.q0();
-                System.out.println( scanner.tokenReconhecido );
+                if (scanner.tokenReconhecido != null)
+                    System.out.println( scanner.tokenReconhecido );
             } while( scanner.tokenReconhecido != Constantes.Token.EOF);
                     
             System.out.println("Sucesso! :D");

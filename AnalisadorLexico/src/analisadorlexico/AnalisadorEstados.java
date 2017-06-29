@@ -15,16 +15,14 @@ public class AnalisadorEstados extends AnalisadorLexico
         
         if( this.proxCaractere == ' ')
         {
-            this.tokenReconhecido = Constantes.Token.ESPACO;
+            this.tokenReconhecido = null;
             leProxCaractere();
-//            q0();
             
         } 
         else if( proxCaractereIs(SEPARADOR))
         {
-            this.tokenReconhecido = Constantes.Token.SEPARADOR;
+            this.tokenReconhecido = null;
             leProxCaractere();
-//            q0();
         }
         else if( this.proxCaractere == EOF )
         {
@@ -375,11 +373,9 @@ public class AnalisadorEstados extends AnalisadorLexico
     }
     public void ach0(){
         this.tokenReconhecido = Token.ACH;
-//        leProxCaractere();
     }
     public void fch0(){
         this.tokenReconhecido = Token.FCH;
-//        leProxCaractere();
     }
     public void n0(){
         this.tokenReconhecido = Token.NUMERO;
@@ -387,11 +383,19 @@ public class AnalisadorEstados extends AnalisadorLexico
             leProxCaractere();
             n1();
         }
+        else if (this.proxCaractereIs(DIGITO)){
+            leProxCaractere();
+            n0();
+        }
     }
     public void n1(){
         if (proxCaractereIs(DIGITO)){
             leProxCaractere();
             n2();
+        }
+        else{
+            System.out.println("Entrada não reconhecida");
+            throw(new ErroLexico(this.proxCaractere,DIGITO));
         }
     }
     public void n2(){
