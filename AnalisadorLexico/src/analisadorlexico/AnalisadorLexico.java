@@ -24,7 +24,7 @@ public class AnalisadorLexico extends Analisador
              while( (c = arq.read() ) != -1 )
              {
                 // mostra leitura arquivo caractere por caractere
-                System.out.println("" + (char)c);
+//                System.out.println("" + (char)c);
                 this.entrada.append( (char)c );
              }
              System.out.println("concluido");
