@@ -2,7 +2,7 @@ package analisadorlexico;
 
 public interface Constantes {
     
-    enum Token {SEPARADOR, ESPACO,EOF, WHILE, DO, IF , FOR, SWITCH, CASE, AP, FP, ACH, FCH, PTV, DPT, NEGACAO, VARIAVEL, NUMERO, OP_UN_BIN, OP_UNARIO, OP_BINARIO, IGUALDADE, ASP, CARACTERE }
+    enum Token {SEPARADOR, ESPACO,EOF, WHILE, DO, IF , FOR, SWITCH, CASE, AP, FP, VIRG, ACH, FCH, PTV, DPT, NEGACAO, VARIAVEL, NUMERO, OP_UN_BIN, OP_UNARIO, OP_BINARIO, IGUALDADE, ASP, CARACTERE }
         
     char    EOF = 0,
             AP = '(',
@@ -11,6 +11,7 @@ public interface Constantes {
             FCH = '}',
             PTV = ';',
             DPT = ':',
+            VIRG = ',',
             ESPACO = ' ',
             NEGACAO = '!';
             

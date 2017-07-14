@@ -9,7 +9,7 @@ public class AnalisadorLexico extends Analisador
 
     protected char proxCaractere;
     protected int linha = 1;
-    protected Token tokenReconhecido;
+    public Token tokenReconhecido;
     protected int posicao = 0;
     protected StringBuffer entrada = new StringBuffer();
     
