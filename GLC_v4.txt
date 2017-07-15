@@ -1,0 +1,80 @@
+programa -> listaComandos
+
+listaComandos-> comando listaComandos | lambda
+
+comando -> atribuicao | if | while | doWhile | for | switch | <PTV> | expressao<PTV> | lambda
+
+while -> <WHILE> <AP> expressao <FP> corpo
+
+corpo -> comando | <ACH> listaComandos <FCH>
+
+doWhile -> <DO> A <WHILE> <AP> expressao <FP> <PTV>
+
+for -> <FOR> <AP> atribuicao <PTV> expressao <PTV> atribuicao <FP> corpo
+
+if -> <IF> <AP> expressao <FP> corpo
+
+switch -> <SWITCH> <AP> expressao <FP> <ACH> caso <FCH>
+
+caso -> <CASE> condicao <DPT> listaComandos bicaso | lambda
+
+bicaso -> caso | lambda
+
+condicao -> <CARACTERE> | <NUMERO>
+
+atribuicao -> <VARIAVEL> cmdSubAtrib | cmdOP
+
+cmdSubAtrib -> <IGUALDADE> expressao multAtribuicao | <OP-UNARIO> 
+
+
+multAtribuicao -> <VIRG> atribuicao | lambda
+
+expressao -> <NEGACAO> expressao | <AP> expressao <FP> | cmdExp subExpressao
+
+
+cmdExp -> <VARIAVEL> cmdSubExp   |  cmdOP  | <NUMERO>
+
+
+cmdSubExp -> <OP-UNARIO> | lambda
+
+subExpressao -> <OP-BINARIO> expressao | <OP-UN-BIN> expressao | lambda
+
+cmdOP ->  <OP-UNARIO> <VARIAVEL> | <OP-UN-BIN> expressao
+
+
+/////////////////////////TOKENS///////////////////////////////
+
+<WHILE> : while
+<DO> : do
+<IF> : if
+<FOR> : for
+<SWITCH> : switch
+
+<AP> : (
+<FP> : )
+<ACH> : {
+<FCH> : }
+
+<PTV> : ;
+<DPT> : :
+
+<NEGACAO> : !
+
+<VARIAVEL> : variavel| sinal variavel
+variavel -> letra N
+N -> letra | letra N | digito | digito N | lambda
+letra -> a|...|z|A|...|Z
+digito -> 0|...|9
+
+<NUMERO> : inteiro | real
+inteiro -> digito | digito inteiro 
+inteiro com sinal -> sinal digito | sinal digito inteiro
+real -> inteiro . inteiro | inteiro com sinal . inteiro 
+sinal -> + | -
+
+<OP-UN-BIN> : + | -
+<OP-UNARIO> -> ++ | --
+<OP-BINARIO> : * | / | % | && | || | == | != | > | >= | < |  <= | & | | | >> | << 
+<IGUALDADE> : = | += | -= | *= | /= | %= | &= | |=
+
+<CARACTERE> : 'a'|...|'z'|'A'|...|'Z' | '0' |...| '9'
