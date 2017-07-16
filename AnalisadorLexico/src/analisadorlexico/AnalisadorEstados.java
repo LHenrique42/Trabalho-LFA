@@ -26,6 +26,7 @@ public class AnalisadorEstados extends AnalisadorLexico
         }
         else if( this.proxCaractere == EOF )
         {
+            this.tokenReconhecido = Token.EOF;
             leProxCaractere();
             f();
         }
