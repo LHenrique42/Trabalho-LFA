@@ -1,16 +1,27 @@
 package analisadorsintatico;
 
-public class AnalisadorGramatica extends AnalisadorSintatico {
+public class AnalisadorGramatica extends AnalisadorSintatico 
+{
 	
-	public AnalisadorGramatica(String _nomeArquivoEntrada) {
+	public AnalisadorGramatica(String _nomeArquivoEntrada) 
+        {
 		super(_nomeArquivoEntrada);
 	}
-	public void programa() {
-		listaComandos(); 
+	public void programa() 
+        {
+		listaComandos();
+//                reconhece(Token.EOF);
 	}
         
-        public void listaComandos() {
-            if(proxTokenIs(Token.IF) || proxTokenIs(Token.WHILE) || proxTokenIs(Token.DO) || proxTokenIs(Token.FOR) || proxTokenIs(Token.SWITCH) || proxTokenIs(Token.PTV) || proxTokenIs(Token.NEGACAO) || proxTokenIs(Token.AP) || proxTokenIs(Token.NUMERO) || proxTokenIs(Token.VARIAVEL) || proxTokenIs(Token.VARIAVEL) || proxTokenIs(Token.OP_UNARIO) || proxTokenIs(Token.OP_UN_BIN)){
+        public void listaComandos() 
+        {
+            if( proxTokenIs(Token.IF) || proxTokenIs(Token.WHILE) ||
+                    proxTokenIs(Token.DO) || proxTokenIs(Token.FOR) ||
+                    proxTokenIs(Token.SWITCH) || proxTokenIs(Token.PTV) ||
+                    proxTokenIs(Token.NEGACAO) || proxTokenIs(Token.AP) || 
+                    proxTokenIs(Token.NUMERO) || proxTokenIs(Token.VARIAVEL) 
+                    || proxTokenIs(Token.OP_UNARIO) || proxTokenIs(Token.OP_UN_BIN)){
+                
               comando();
               listaComandos();
             }else if(proxTokenIs(Token.EOF)){
@@ -88,7 +99,7 @@ public class AnalisadorGramatica extends AnalisadorSintatico {
         }
 
         public void corpo() {
-            if(proxTokenIs(Token.IF) || proxTokenIs(Token.WHILE) || proxTokenIs(Token.DO) || proxTokenIs(Token.FOR) || proxTokenIs(Token.SWITCH) || proxTokenIs(Token.PTV) || proxTokenIs(Token.NEGACAO) || proxTokenIs(Token.AP) || proxTokenIs(Token.NUMERO) || proxTokenIs(Token.VARIAVEL) || proxTokenIs(Token.VARIAVEL) || proxTokenIs(Token.OP_UNARIO) || proxTokenIs(Token.OP_UN_BIN)){
+            if(proxTokenIs(Token.IF) || proxTokenIs(Token.WHILE) || proxTokenIs(Token.DO) || proxTokenIs(Token.FOR) || proxTokenIs(Token.SWITCH) || proxTokenIs(Token.PTV) || proxTokenIs(Token.NEGACAO) || proxTokenIs(Token.AP) || proxTokenIs(Token.NUMERO) || proxTokenIs(Token.VARIAVEL) || proxTokenIs(Token.OP_UNARIO) || proxTokenIs(Token.OP_UN_BIN)){
               comando();
             }else if(proxTokenIs(Token.ACH) ){
               reconhece(Token.ACH);
@@ -127,17 +138,45 @@ public class AnalisadorGramatica extends AnalisadorSintatico {
                reconhece(Token.NUMERO);
             }
         }
+        
         // necessita correção
         public void atribuicao() {
             if(proxTokenIs(Token.VARIAVEL)){
               reconhece(Token.VARIAVEL);
-              reconhece(Token.IGUALDADE);
-              expressao();
-              multAtribuicao();
-            }else if(proxTokenIs(Token.VARIAVEL) || proxTokenIs(Token.OP_UNARIO) || proxTokenIs(Token.OP_UN_BIN) ){
-               unarios();
+              cmdSubAtrib();
+            }else if(proxTokenIs(Token.OP_UNARIO) || proxTokenIs(Token.OP_UN_BIN) ){
+               cmdOP();
             }
         }
+        
+        
+        public void cmdOP()
+        {
+            if(proxTokenIs(Token.OP_UNARIO) )
+            {
+                reconhece(Token.OP_UNARIO);
+                reconhece(Token.VARIAVEL);
+            } else if(proxTokenIs(Token.OP_UN_BIN))
+                    {
+                        reconhece(Token.OP_UN_BIN);
+                        expressao();
+                    }
+            
+        }
+        
+        public void cmdSubAtrib()
+        {
+            if ( proxTokenIs(Token.IGUALDADE) )
+            {
+                reconhece( Token.IGUALDADE);
+                expressao();
+                multAtribuicao();
+            } else if ( proxTokenIs(Token.OP_UNARIO) )
+            {
+                reconhece( Token.OP_UNARIO);
+            }
+        }
+        
         
         public void multAtribuicao() {
             if(proxTokenIs(Token.VIRG)){
@@ -152,41 +191,53 @@ public class AnalisadorGramatica extends AnalisadorSintatico {
             if(proxTokenIs(Token.NEGACAO)){
               reconhece(Token.NEGACAO);
               expressao();
-            }else if(proxTokenIs(Token.EOF) ){
+            }else if(proxTokenIs(Token.AP) ){
               reconhece(Token.AP);
               expressao();
               reconhece(Token.FP);
-            }else if(proxTokenIs(Token.EOF) ){
-              reconhece(Token.NUMERO);
-              subExpressao();
-            }else if(proxTokenIs(Token.EOF) ){
-              reconhece(Token.VARIAVEL);
-              subExpressao();
-            }else if(proxTokenIs(Token.VARIAVEL) || proxTokenIs(Token.OP_UNARIO) || proxTokenIs(Token.OP_UN_BIN) ){
-               unarios();
-               subExpressao();
+            }else if( proxTokenIs(Token.NUMERO) || proxTokenIs(Token.VARIAVEL) ||
+                    proxTokenIs(Token.OP_UNARIO) || proxTokenIs(Token.OP_UN_BIN)  ){
+              
+              cmdExp();
             }
         }
         
-        public void unarios() {
-            if(proxTokenIs(Token.VARIAVEL)){
-              reconhece(Token.VARIAVEL);
-              reconhece(Token.OP_UNARIO);
-            }else if(proxTokenIs(Token.OP_UNARIO) ){
-              reconhece(Token.OP_UNARIO);
-              reconhece(Token.VARIAVEL);
-            }else if(proxTokenIs(Token.OP_UN_BIN) ){
-              reconhece(Token.OP_UN_BIN);
-              reconhece(Token.VARIAVEL);
-            }
+        public void cmdExp()
+        {
+             if(proxTokenIs(Token.VARIAVEL) )
+             {
+                 reconhece(Token.VARIAVEL);
+                 cmdSubExp();
+             }else if( proxTokenIs(Token.NUMERO) )
+             {
+                 reconhece(Token.NUMERO);
+             } else if ( proxTokenIs(Token.OP_UNARIO) || proxTokenIs(Token.OP_UN_BIN) )
+             {
+                 cmdOP();
+             }
+        }
+        
+        public void cmdSubExp()
+        {
+             if(proxTokenIs(Token.OP_UNARIO) )
+             {
+                 reconhece(Token.OP_UNARIO);
+             }else if( proxTokenIs(Token.EOF) )
+             {
+                 ;
+             }
         }
         
         public void subExpressao() {
-            if(proxTokenIs(Token.NEGACAO) || proxTokenIs(Token.AP) || proxTokenIs(Token.NUMERO) || proxTokenIs(Token.VARIAVEL) || proxTokenIs(Token.VARIAVEL) || proxTokenIs(Token.OP_UNARIO) || proxTokenIs(Token.OP_UN_BIN)){
+            if( proxTokenIs(Token.OP_UNARIO)){
+              reconhece(Token.OP_UNARIO);
+              expressao();              
+            }else if( proxTokenIs(Token.OP_UN_BIN)){
+              reconhece(Token.OP_UN_BIN);
               expressao();
-              reconhece(Token.OP_BINARIO);
-            }else if(proxTokenIs(Token.EOF) ){
-               ;
+            }else if(proxTokenIs(Token.EOF) )
+            {
+             ;
             }
         }
 }

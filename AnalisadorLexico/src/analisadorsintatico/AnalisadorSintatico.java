@@ -22,7 +22,7 @@ public class AnalisadorSintatico extends Analisador implements Constantes {
 	// verifica se o próximo token é t
 	// avança o ponteiro para o próximo token
 	public void reconhece(Token t) {
-		if(t == this.scanner.tokenReconhecido) 
+		if(t == this.scanner.tokenReconhecido || this.scanner.tokenReconhecido == null) 
 			this.leProxToken();
 		else
 			throw new ErroSintatico(this.scanner.tokenReconhecido, t);
@@ -31,10 +31,7 @@ public class AnalisadorSintatico extends Analisador implements Constantes {
 	// verifica se o próximo token é t
  // N O avança o ponteiro de leitura
 	public boolean proxTokenIs(Token t) {
-		if(t == this.scanner.tokenReconhecido) 
-			return true;
-		else
-			return false;
+		return t == this.scanner.tokenReconhecido;
 	}
 }
 
