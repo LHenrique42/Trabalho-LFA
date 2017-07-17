@@ -13,15 +13,15 @@ public class AnalisadorEstados extends AnalisadorLexico
     // Estados
     public void q0(){
         
-        if( this.proxCaractere == ' ')
+        if( this.proxCaractere == 32)
         {
-            this.tokenReconhecido = null;
+            this.tokenReconhecido = Token.ESPACO;
             leProxCaractere();
-            
+            ///System.out.println(this.proxCaractere);
         } 
         else if( proxCaractereIs(SEPARADOR))
         {
-            this.tokenReconhecido = null;
+            this.tokenReconhecido = Token.SEPARADOR;
             leProxCaractere();
         }
         else if( this.proxCaractere == EOF )
