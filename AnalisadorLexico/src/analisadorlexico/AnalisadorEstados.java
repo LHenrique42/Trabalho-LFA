@@ -495,7 +495,7 @@ public class AnalisadorEstados extends AnalisadorLexico
         }
     }
     public void ig0(){
-        this.tokenReconhecido = Token.OP_BINARIO;
+        this.tokenReconhecido = Token.IGUALDADE;
         if(this.proxCaractere == '='){
             leProxCaractere();
             opb0();

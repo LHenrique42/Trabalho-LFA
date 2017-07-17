@@ -37,7 +37,7 @@ public class ParserApp
         } catch (ErroSintatico e) {
             System.out.println("Erro sintatico: " + e.toString() );
         } catch (RuntimeException e) {
-            System.out.println("Erro lexico2: " + e.getMessage() );
+            System.out.println( e.getMessage() );
         }
 
     }

@@ -146,7 +146,8 @@ public class AnalisadorGramatica extends AnalisadorSintatico
         }
         
         // necessita correção
-        public void atribuicao() {
+        public void atribuicao() 
+        {
             if(proxTokenIs(Token.VARIAVEL)){
               reconhece(Token.VARIAVEL);
               cmdSubAtrib();
@@ -193,8 +194,7 @@ public class AnalisadorGramatica extends AnalisadorSintatico
               atribuicao();
             }else if(proxTokenIs(Token.EOF) ){
                ;
-            }else
-                throw new ErroSintatico( this.scanner.tokenReconhecido );
+            }
         }
         
         public void expressao() {
