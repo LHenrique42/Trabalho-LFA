@@ -26,7 +26,8 @@ public class AnalisadorGramatica extends AnalisadorSintatico
               listaComandos();
             }else if(proxTokenIs(Token.EOF)){
                     ;
-            }
+            } 
+                
 	}
         
         public void comando() {
@@ -105,7 +106,6 @@ public class AnalisadorGramatica extends AnalisadorSintatico
               reconhece(Token.ACH);
               listaComandos();
               reconhece(Token.FCH);
-
             } else  
                 throw new ErroSintatico( this.scanner.tokenReconhecido );
             
@@ -121,7 +121,8 @@ public class AnalisadorGramatica extends AnalisadorSintatico
               bicaso();
             }else if(proxTokenIs(Token.EOF)){
                 ;
-            }
+            }else
+                throw new ErroSintatico( this.scanner.tokenReconhecido );
         }
         
         public void bicaso() {
@@ -130,7 +131,8 @@ public class AnalisadorGramatica extends AnalisadorSintatico
               caso();
             }else if(proxTokenIs(Token.EOF)){
                 ;
-            }
+            }else
+                throw new ErroSintatico( this.scanner.tokenReconhecido );
         }
         
         public void condicao() {
@@ -139,7 +141,8 @@ public class AnalisadorGramatica extends AnalisadorSintatico
               caso();
             }else if(proxTokenIs(Token.NUMERO)){
                reconhece(Token.NUMERO);
-            }
+            }else
+                throw new ErroSintatico( this.scanner.tokenReconhecido );
         }
         
         // necessita correção
@@ -149,7 +152,8 @@ public class AnalisadorGramatica extends AnalisadorSintatico
               cmdSubAtrib();
             }else if(proxTokenIs(Token.OP_UNARIO) || proxTokenIs(Token.OP_UN_BIN) ){
                cmdOP();
-            }
+            }else
+                throw new ErroSintatico( this.scanner.tokenReconhecido );
         }
         
         
@@ -163,7 +167,8 @@ public class AnalisadorGramatica extends AnalisadorSintatico
                     {
                         reconhece(Token.OP_UN_BIN);
                         expressao();
-                    }
+                    }else
+                throw new ErroSintatico( this.scanner.tokenReconhecido );
             
         }
         
@@ -177,7 +182,8 @@ public class AnalisadorGramatica extends AnalisadorSintatico
             } else if ( proxTokenIs(Token.OP_UNARIO) )
             {
                 reconhece( Token.OP_UNARIO);
-            }
+            }else
+                throw new ErroSintatico( this.scanner.tokenReconhecido );
         }
         
         
@@ -187,7 +193,8 @@ public class AnalisadorGramatica extends AnalisadorSintatico
               atribuicao();
             }else if(proxTokenIs(Token.EOF) ){
                ;
-            }
+            }else
+                throw new ErroSintatico( this.scanner.tokenReconhecido );
         }
         
         public void expressao() {
@@ -203,7 +210,8 @@ public class AnalisadorGramatica extends AnalisadorSintatico
               
               cmdExp();
               subExpressao();
-            }
+            }else
+                throw new ErroSintatico( this.scanner.tokenReconhecido );
         }
         
         public void cmdExp()
@@ -218,7 +226,8 @@ public class AnalisadorGramatica extends AnalisadorSintatico
              } else if ( proxTokenIs(Token.OP_UNARIO) || proxTokenIs(Token.OP_UN_BIN) )
              {
                  cmdOP();
-             }
+             }else
+                throw new ErroSintatico( this.scanner.tokenReconhecido );
         }
         
         public void cmdSubExp()
