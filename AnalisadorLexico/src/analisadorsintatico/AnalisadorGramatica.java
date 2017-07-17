@@ -106,7 +106,10 @@ public class AnalisadorGramatica extends AnalisadorSintatico
               listaComandos();
               reconhece(Token.FCH);
 
-            }
+            } else  
+                throw new ErroSintatico( this.scanner.tokenReconhecido );
+            
+                
         }
         
         public void caso() {
@@ -199,6 +202,7 @@ public class AnalisadorGramatica extends AnalisadorSintatico
                     proxTokenIs(Token.OP_UNARIO) || proxTokenIs(Token.OP_UN_BIN)  ){
               
               cmdExp();
+              subExpressao();
             }
         }
         
@@ -225,12 +229,13 @@ public class AnalisadorGramatica extends AnalisadorSintatico
              }else if( proxTokenIs(Token.EOF) )
              {
                  ;
-             }
+             } 
+//                 System.out.println("ERROR" + this.scanner.tokenReconhecido);
         }
         
         public void subExpressao() {
-            if( proxTokenIs(Token.OP_UNARIO)){
-              reconhece(Token.OP_UNARIO);
+            if( proxTokenIs(Token.OP_BINARIO)){
+              reconhece(Token.OP_BINARIO);
               expressao();              
             }else if( proxTokenIs(Token.OP_UN_BIN)){
               reconhece(Token.OP_UN_BIN);
