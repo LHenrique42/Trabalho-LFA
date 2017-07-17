@@ -9,6 +9,7 @@ public class ErroSintatico extends RuntimeException implements Constantes {
 	public ErroSintatico(Token _tokenEncontrado, Token[] _tokensEsperados) {
 		this.tokenEncontrado = _tokenEncontrado;
 		this.tokensEsperados = _tokensEsperados;
+                this.mensagem = "";
 	}
 	public ErroSintatico(Token _tokenEncontrado, Token _tokenEsperado) {
 		this.tokenEncontrado = _tokenEncontrado;
@@ -24,7 +25,8 @@ public class ErroSintatico extends RuntimeException implements Constantes {
 	}
         
 	public String toString() {
-		for(int i=0; i<this.tokensEsperados.length; i++)
+            
+            for(int i=0; i<this.tokensEsperados.length; i++)
 			this.mensagem += this.tokensEsperados[i] + " ";
 		return "token encontrado: "+this.tokenEncontrado+
 		       "\nera(m) esperado(s): "+ this.mensagem;
