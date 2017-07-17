@@ -211,7 +211,16 @@ public class AnalisadorGramatica extends AnalisadorSintatico
               cmdExp();
               subExpressao();
             }else
-                throw new ErroSintatico( this.scanner.tokenReconhecido );
+            {
+                Token[] tkEsperados = new Token[6];
+                tkEsperados[0] = Token.NEGACAO;
+                tkEsperados[1] = Token.AP;
+                tkEsperados[2] = Token.NUMERO;
+                tkEsperados[3] = Token.VARIAVEL;
+                tkEsperados[4] = Token.OP_UNARIO;
+                tkEsperados[5] = Token.OP_UN_BIN;
+                throw new ErroSintatico( this.scanner.tokenReconhecido, tkEsperados );
+            }
         }
         
         public void cmdExp()
@@ -226,8 +235,7 @@ public class AnalisadorGramatica extends AnalisadorSintatico
              } else if ( proxTokenIs(Token.OP_UNARIO) || proxTokenIs(Token.OP_UN_BIN) )
              {
                  cmdOP();
-             }else
-                throw new ErroSintatico( this.scanner.tokenReconhecido );
+             }
         }
         
         public void cmdSubExp()
@@ -237,9 +245,8 @@ public class AnalisadorGramatica extends AnalisadorSintatico
                  reconhece(Token.OP_UNARIO);
              }else if( proxTokenIs(Token.EOF) )
              {
-                 ;
-             } 
-//                 System.out.println("ERROR" + this.scanner.tokenReconhecido);
+                ;
+             }
         }
         
         public void subExpressao() {
