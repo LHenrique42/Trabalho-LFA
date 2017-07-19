@@ -12,7 +12,8 @@ public class ErroSintatico extends RuntimeException implements Constantes {
                 this.mensagem = "";
 	}
 	public ErroSintatico(Token _tokenEncontrado, Token _tokenEsperado) {
-		this.tokenEncontrado = _tokenEncontrado;
+		this.mensagem = "";
+                this.tokenEncontrado = _tokenEncontrado;
 		this.tokensEsperados = new Token[1];
 		tokensEsperados[0] = _tokenEsperado;
 	}

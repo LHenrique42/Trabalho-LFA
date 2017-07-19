@@ -1,11 +1,23 @@
-if (( a++ < b + c ) ) {
+a = 3.5;
+b = .3;
+c = -.6756;
+if ( a++ < b3 + whi*_++ && c == true ) {
 }
 
-for( a = b + 1; x + 1; i++)
-{
+for( a = b + 1; x + 1; ++i ){
     while(1)
         ola + 1;
     do 
-      ++chule
-    while( var2 += 2 );
+      ++chule;
+    while( w += 2 );
+
+    do{
+        hello;
+    }while( x || !y );
+
+    if(var1++){}
+    a++;
+    --b;
+    
 }
+

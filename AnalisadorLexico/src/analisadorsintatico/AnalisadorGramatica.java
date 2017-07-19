@@ -148,7 +148,8 @@ public class AnalisadorGramatica extends AnalisadorSintatico
         // necessita correção
         public void atribuicao() 
         {
-            if(proxTokenIs(Token.VARIAVEL)){
+            if(proxTokenIs(Token.VARIAVEL))
+            {
               reconhece(Token.VARIAVEL);
               cmdSubAtrib();
             }else if(proxTokenIs(Token.OP_UNARIO) || proxTokenIs(Token.OP_UN_BIN) ){
@@ -177,12 +178,14 @@ public class AnalisadorGramatica extends AnalisadorSintatico
         {
             if ( proxTokenIs(Token.IGUALDADE) )
             {
+                System.out.println("Igu");
                 reconhece( Token.IGUALDADE);
                 expressao();
                 multAtribuicao();
             } else if ( proxTokenIs(Token.OP_UNARIO) )
             {
                 reconhece( Token.OP_UNARIO);
+                System.out.println("Aqui");
             }else
                 throw new ErroSintatico( this.scanner.tokenReconhecido );
         }
@@ -252,6 +255,9 @@ public class AnalisadorGramatica extends AnalisadorSintatico
         public void subExpressao() {
             if( proxTokenIs(Token.OP_BINARIO)){
               reconhece(Token.OP_BINARIO);
+              expressao();              
+            }else if( proxTokenIs(Token.IGUALDADE)){
+              reconhece(Token.IGUALDADE);
               expressao();              
             }else if( proxTokenIs(Token.OP_UN_BIN)){
               reconhece(Token.OP_UN_BIN);
