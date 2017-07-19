@@ -1,13 +1,29 @@
 package analisadorsintatico;
 
+/**
+ *  Classe que representa a Gramatica Livre de Contexto da linguagem.
+ *  Verifica se a sintaxe esta correta 
+ * @author 
+ */
+
 public class AnalisadorGramatica extends AnalisadorSintatico 
 {
-	
+        /**
+         *  Instancia analisador gramatica utilizando o nome do arquivo
+         * @author Thaylo
+         * @param _nomeArquivoEntrada  nome do arquivo a ser testado
+         */
+
 	public AnalisadorGramatica(String _nomeArquivoEntrada) 
         {
 		super(_nomeArquivoEntrada);
 	}
-	public void programa() 
+	
+        /**
+         *  Start da gramatica
+         * @author Thaylo
+         */
+        public void programa() 
         {
 		listaComandos();
 //                reconhece(Token.EOF);

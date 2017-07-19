@@ -1,27 +1,53 @@
 package analisadorsintatico;
 import analisadorlexico.*;
 
+/**
+ *  Analisador sintatico responsavel por verificar os comandos e avançar os tokens e invocar a maquina de moore
+ * @author elly
+ */
 
 public class AnalisadorSintatico extends Analisador implements Constantes 
 {
 	protected AnalisadorEstados scanner;
 	
+        /**
+         *  Instancia um analisador sintatico q
+         * @author 
+         * @param  _nomeArquivoEntrada : diretorio+nome do arquivo a ser analisado
+         */
+
 	public AnalisadorSintatico(String _nomeArquivoEntrada) {
 		this.scanner = new AnalisadorEstados(_nomeArquivoEntrada);
 		// lê o primeiro token e o coloca no campo tokenReconhecido
 		this.leProxToken();
 	}
-	public AnalisadorSintatico() {
+	
+        /**
+         *  Contrutor default para analisadores
+         * @author elly
+         */
+
+        public AnalisadorSintatico() {
 		super();
 	}
 
-	// executa 1 vez a máquina de Moore
+        /**
+         *  Executa uma vez a maquina de Moore determinando o proximo token
+         * @author elly
+         */
+
 	public void leProxToken() 
         {
             this.scanner.q0();
 //            System.out.println(this.scanner.tokenReconhecido);
             ignoreEspaco();
 	}
+
+        
+         /**
+         *  Ignora tokens de espaços  e separadores antes de fazer verificaçao
+         * @author elly
+         */
 
         public void ignoreEspaco()
         {
@@ -34,8 +60,12 @@ public class AnalisadorSintatico extends Analisador implements Constantes
             
         }
         
-	// verifica se o próximo token é t
-	// avança o ponteiro para o próximo token
+         /**
+         *  Verifica se proximo token e t e avanca ponteiro de leitura
+         * @author 
+         * @param t : Token esperado a ser analisado
+         */
+
 	public void reconhece(Token t) {
             
             ignoreEspaco();
@@ -49,8 +79,12 @@ public class AnalisadorSintatico extends Analisador implements Constantes
                 throw new ErroSintatico(this.scanner.tokenReconhecido, t);
 	}
 
-	// verifica se o próximo token é t
-        // N O avança o ponteiro de leitura
+	/**
+        * Verifica se  proximo token e t sem avancar ponteiro de leitura
+        * @author elly
+        * @param t : token esperado a ser analisado
+        */
+
 	public boolean proxTokenIs(Token t) {
 		return t == this.scanner.tokenReconhecido;
 	}
