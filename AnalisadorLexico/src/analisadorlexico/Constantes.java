@@ -1,5 +1,8 @@
 package analisadorlexico;
-
+/**
+    * Classes de constantes, todos os tokens das classidicaçoes listados
+    * @author 
+    */
 public interface Constantes {
     
     enum Token {SEPARADOR, ESPACO,EOF, WHILE, DO, IF , FOR, SWITCH, CASE, AP, FP, VIRG, ACH, FCH, PTV, DPT, NEGACAO, VARIAVEL, NUMERO, OP_UN_BIN, OP_UNARIO, OP_BINARIO, IGUALDADE, ASP, CARACTERE }

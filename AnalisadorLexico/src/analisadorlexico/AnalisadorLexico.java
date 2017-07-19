@@ -3,6 +3,11 @@ package analisadorlexico;
 
 import java.io.FileReader;
 import java.io.IOException;
+  
+    /**
+    * Classe responsavel por validar lexicamente as entradas
+    * @author 
+    */
 
 public class AnalisadorLexico extends Analisador 
 {
@@ -14,7 +19,12 @@ public class AnalisadorLexico extends Analisador
     protected StringBuffer entrada = new StringBuffer();
     
             
-
+    /**
+    * Metodo responsavel pela conexao com arquivo e copia para memoria.
+    * @author 
+    * @param nome : arquivo do qual sera copiado
+    * @throws RuntimeException : Caso haja problema na abertura do arquivo
+    */
     public AnalisadorLexico( String nome )
     {
         super( nome );
@@ -37,7 +47,11 @@ public class AnalisadorLexico extends Analisador
         }
     }
     
-////Implementar função para ler o próximo caractere
+/**
+    * Le caracter da memoria e adiciona na posiçao de proximo 
+    * @author 
+    * @throws IndexOutOfBoundsExceptio : Caso nao haja mais caracteres
+    */
     public void leProxCaractere()
     {
         try {
@@ -48,7 +62,12 @@ public class AnalisadorLexico extends Analisador
         }
     }    
 
-////Implementar função para dizer qual o caractere lido    
+/**
+    * Determina se o proximo caracter lido e 
+    * @author 
+    * @param s : string contendo os caracteres que deseja verificar
+    * @return true se o proximo caracter e uma substring de s
+    */
     public boolean proxCaractereIs(String s)
     {
         return ( s.indexOf(this.proxCaractere) != -1 );       

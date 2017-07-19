@@ -1,6 +1,7 @@
 package analisadorlexico;
  /**
     * Classe representa a maquina de moore
+    * @author 
     */
 public class AnalisadorEstados extends AnalisadorLexico 
 {
@@ -31,6 +32,7 @@ public class AnalisadorEstados extends AnalisadorLexico
         else if( proxCaractereIs(SEPARADOR))
         {
             this.tokenReconhecido = Token.SEPARADOR;
+            if ( this.proxCaractere == '\n' ) this.linha++;
             leProxCaractere();
         }
         else if( this.proxCaractere == EOF )
@@ -144,7 +146,7 @@ public class AnalisadorEstados extends AnalisadorLexico
             leProxCaractere();
             neg0();
         }
-        //ta errado -> nao sei fazer aspas simples entre aspas simples
+        
         else if( this.proxCaractere == 39 )
         {
             leProxCaractere();
@@ -182,6 +184,7 @@ public class AnalisadorEstados extends AnalisadorLexico
             v0();
         }
     }
+    
     public void q2(){
         this.tokenReconhecido = Token.VARIAVEL;    
         if(this.proxCaractere == 'i'){
