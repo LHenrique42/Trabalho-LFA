@@ -1,16 +1,25 @@
 package analisadorlexico;
-
+ /**
+    * Classe representa a maquina de moore
+    */
 public class AnalisadorEstados extends AnalisadorLexico 
 {
     
-    // Contrutor 
+    /**
+    * Contrutor da classe 
+    * @author 
+    * @param nome diretorio/nome do arquivo a ser analisado
+    */
     public AnalisadorEstados( String nome )
     {
         super(nome);
     }
     
     
-    // Estados
+    /**
+    * Estado inicial da maquina
+    * @author 
+    */
     public void q0(){
         
         if( this.proxCaractere == 32)
