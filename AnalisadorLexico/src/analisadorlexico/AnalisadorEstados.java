@@ -1,27 +1,41 @@
 package analisadorlexico;
-
+ /**
+    * Classe representa a maquina de moore
+    * @author Thaylo
+    */
 public class AnalisadorEstados extends AnalisadorLexico 
 {
     
-    // Contrutor 
+    /**
+    * Contrutor da classe 
+    * @author 
+    * @param nome diretorio/nome do arquivo a ser analisado
+    */
     public AnalisadorEstados( String nome )
     {
         super(nome);
     }
     
     
-    // Estados
+    /**
+    * Estado inicial da maquina
+    * @author 
+    */
     public void q0(){
         
         if( this.proxCaractere == 32)
         {
             this.tokenReconhecido = Token.ESPACO;
             leProxCaractere();
-            ///System.out.println(this.proxCaractere);
+        }else if( this.proxCaractere == ',')
+        {
+            this.tokenReconhecido = Token.VIRG;
+            leProxCaractere();
         } 
         else if( proxCaractereIs(SEPARADOR))
         {
             this.tokenReconhecido = Token.SEPARADOR;
+            if ( this.proxCaractere == '\n' ) this.linha++;
             leProxCaractere();
         }
         else if( this.proxCaractere == EOF )
@@ -135,7 +149,7 @@ public class AnalisadorEstados extends AnalisadorLexico
             leProxCaractere();
             neg0();
         }
-        //ta errado -> nao sei fazer aspas simples entre aspas simples
+        
         else if( this.proxCaractere == 39 )
         {
             leProxCaractere();
@@ -157,23 +171,26 @@ public class AnalisadorEstados extends AnalisadorLexico
         }
         else {
             System.out.println("Entrada não reconhecida");
-            throw(new ErroLexico(this.proxCaractere,ALFABETO));
+            throw(new ErroLexico(this.proxCaractere,ALFABETO, this.linha));
         }
     }
     
 
     public void q1(){
+        this.tokenReconhecido = Token.VARIAVEL;
         if(this.proxCaractere == 'h'){
             leProxCaractere();
             q2();
         }
-        else if(proxCaractereIs(LETRA) && this.proxCaractere != 'h'){
+        else if(( proxCaractereIs(LETRA) || proxCaractereIs(DIGITO) ) && this.proxCaractere != 'h'){
             leProxCaractere();
             v0();
         }
     }
+    
     public void q2(){
-            if(this.proxCaractere == 'i'){
+        this.tokenReconhecido = Token.VARIAVEL;    
+        if(this.proxCaractere == 'i'){
             leProxCaractere();
             q3();
         }
@@ -183,7 +200,8 @@ public class AnalisadorEstados extends AnalisadorLexico
         }
     }
     public void q3(){
-            if(this.proxCaractere == 'l'){
+        this.tokenReconhecido = Token.VARIAVEL;
+        if(this.proxCaractere == 'l'){
             leProxCaractere();
             q4();
         }
@@ -193,6 +211,7 @@ public class AnalisadorEstados extends AnalisadorLexico
         }
     }
     public void q4(){
+        this.tokenReconhecido = Token.VARIAVEL;
         if(this.proxCaractere == 'e'){
             leProxCaractere();
             q5();
@@ -216,6 +235,7 @@ public class AnalisadorEstados extends AnalisadorLexico
     }
     
     public void q6(){
+        this.tokenReconhecido = Token.VARIAVEL;
         if(this.proxCaractere == 'f'){
             leProxCaractere();
             q7();
@@ -233,6 +253,7 @@ public class AnalisadorEstados extends AnalisadorLexico
         }
     }
     public void q8(){
+        this.tokenReconhecido = Token.VARIAVEL;
         if(this.proxCaractere == 'o'){
             leProxCaractere();
             q9();
@@ -243,6 +264,7 @@ public class AnalisadorEstados extends AnalisadorLexico
         }
     }
     public void q9(){
+        this.tokenReconhecido = Token.VARIAVEL;
         if(this.proxCaractere == 'r'){
             leProxCaractere();
             q10();
@@ -260,6 +282,7 @@ public class AnalisadorEstados extends AnalisadorLexico
         }
     }
     public void q11(){
+        this.tokenReconhecido = Token.VARIAVEL;
         if(this.proxCaractere == 'o'){
             leProxCaractere();
             q12();
@@ -277,6 +300,7 @@ public class AnalisadorEstados extends AnalisadorLexico
         }
     }
     public void q13(){
+        this.tokenReconhecido = Token.VARIAVEL;
         if(this.proxCaractere == 'w'){
             leProxCaractere();
             q14();
@@ -287,7 +311,8 @@ public class AnalisadorEstados extends AnalisadorLexico
         }
     }
     public void q14(){
-        if(this.proxCaractere == 'i'){
+    this.tokenReconhecido = Token.VARIAVEL;
+    if(this.proxCaractere == 'i'){
             leProxCaractere();
             q15();
         }
@@ -297,6 +322,7 @@ public class AnalisadorEstados extends AnalisadorLexico
         }
     }
     public void q15(){
+        this.tokenReconhecido = Token.VARIAVEL;
         if(this.proxCaractere == 't'){
             leProxCaractere();
             q16();
@@ -307,6 +333,7 @@ public class AnalisadorEstados extends AnalisadorLexico
         }
     }
     public void q16(){
+        this.tokenReconhecido = Token.VARIAVEL;
         if(this.proxCaractere == 'c'){
             leProxCaractere();
             q17();
@@ -317,6 +344,7 @@ public class AnalisadorEstados extends AnalisadorLexico
         }
     }
     public void q17(){
+        this.tokenReconhecido = Token.VARIAVEL;
         if(this.proxCaractere == 'h'){
             leProxCaractere();
             q18();
@@ -345,6 +373,7 @@ public class AnalisadorEstados extends AnalisadorLexico
         }
     }   
     public void q20(){
+        this.tokenReconhecido = Token.VARIAVEL;
         if(this.proxCaractere == 's'){
             leProxCaractere();
             q21();
@@ -355,6 +384,7 @@ public class AnalisadorEstados extends AnalisadorLexico
         }
     }
     public void q21(){
+        this.tokenReconhecido = Token.VARIAVEL;
         if(this.proxCaractere == 'e'){
             leProxCaractere();
             q22();
@@ -396,7 +426,7 @@ public class AnalisadorEstados extends AnalisadorLexico
         }
         else{
             System.out.println("Entrada não reconhecida");
-            throw(new ErroLexico(this.proxCaractere,DIGITO));
+            throw(new ErroLexico(this.proxCaractere,DIGITO,this.linha));
         }
     }
     public void n2(){
@@ -495,7 +525,7 @@ public class AnalisadorEstados extends AnalisadorLexico
         }
     }
     public void ig0(){
-        this.tokenReconhecido = Token.OP_BINARIO;
+        this.tokenReconhecido = Token.IGUALDADE;
         if(this.proxCaractere == '='){
             leProxCaractere();
             opb0();
@@ -514,7 +544,7 @@ public class AnalisadorEstados extends AnalisadorLexico
             crt1();
         }else{
             System.out.println("Entrada não reconhecida");
-            throw(new ErroLexico(this.proxCaractere,ALFABETO));
+            throw(new ErroLexico(this.proxCaractere,ALFABETO,this.linha));
         }
     }
     public void crt1(){
@@ -523,7 +553,7 @@ public class AnalisadorEstados extends AnalisadorLexico
             crt2();
         }else{
             System.out.println("Entrada não reconhecida");
-            throw(new ErroLexico(this.proxCaractere,"'"));
+            throw(new ErroLexico(this.proxCaractere,"'",this.linha));
         }
     }
     public void crt2()
@@ -552,10 +582,15 @@ public class AnalisadorEstados extends AnalisadorLexico
 
     public void v0(){
         this.tokenReconhecido = Token.VARIAVEL;
-        if(this.proxCaractereIs(LETRA)){
+        if(this.proxCaractereIs(LETRA) || this.proxCaractereIs(DIGITO) ){
             leProxCaractere();
             v0();
         }
     }
+
+    public int getLinha() {
+        return linha;
+    }
    
+    
 }

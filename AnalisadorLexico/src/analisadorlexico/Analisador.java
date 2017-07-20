@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ Classe analisador responsavel por abrir arquivo instanciando 
  */
 package analisadorlexico;
 
@@ -12,6 +10,12 @@ package analisadorlexico;
 public abstract class Analisador implements Constantes 
 {
     protected String nomeArquivoEntrada;
+   
+    /**
+    * Instancia analisador com o nome de arquivo informado
+    * @author 
+    * @param nomeArquivoEntrada nome ou diretorio do arquivo a ser analisado
+    */
     
     public​ Analisador( String nomeArquivoEntrada ) 
     {
