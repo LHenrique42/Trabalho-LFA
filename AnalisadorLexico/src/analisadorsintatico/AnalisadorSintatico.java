@@ -9,7 +9,7 @@ import analisadorlexico.*;
 public class AnalisadorSintatico extends Analisador implements Constantes 
 {
 	protected AnalisadorEstados scanner;
-	
+	private int linha = 1;
         /**
          *  Instancia um analisador sintatico q
          * @author 
@@ -39,7 +39,6 @@ public class AnalisadorSintatico extends Analisador implements Constantes
 	public void leProxToken() 
         {
             this.scanner.q0();
-//            System.out.println(this.scanner.tokenReconhecido);
             ignoreEspaco();
 	}
 
@@ -54,7 +53,6 @@ public class AnalisadorSintatico extends Analisador implements Constantes
             
             while ( this.scanner.tokenReconhecido == Token.ESPACO || this.scanner.tokenReconhecido == Token.SEPARADOR )
             { 
-//                System.out.println(this.scanner.tokenReconhecido + " ignorado." );
                 this.scanner.q0();
             }
             
@@ -76,7 +74,7 @@ public class AnalisadorSintatico extends Analisador implements Constantes
 
             }
             else 
-                throw new ErroSintatico(this.scanner.tokenReconhecido, t);
+                throw new ErroSintatico(this.scanner.tokenReconhecido, this.scanner.getLinha());
 	}
 
 	/**

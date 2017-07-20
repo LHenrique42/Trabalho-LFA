@@ -1,7 +1,7 @@
 package analisadorlexico;
  /**
     * Classe representa a maquina de moore
-    * @author 
+    * @author Thaylo
     */
 public class AnalisadorEstados extends AnalisadorLexico 
 {
@@ -27,7 +27,10 @@ public class AnalisadorEstados extends AnalisadorLexico
         {
             this.tokenReconhecido = Token.ESPACO;
             leProxCaractere();
-            ///System.out.println(this.proxCaractere);
+        }else if( this.proxCaractere == ',')
+        {
+            this.tokenReconhecido = Token.VIRG;
+            leProxCaractere();
         } 
         else if( proxCaractereIs(SEPARADOR))
         {
@@ -168,7 +171,7 @@ public class AnalisadorEstados extends AnalisadorLexico
         }
         else {
             System.out.println("Entrada não reconhecida");
-            throw(new ErroLexico(this.proxCaractere,ALFABETO));
+            throw(new ErroLexico(this.proxCaractere,ALFABETO, this.linha));
         }
     }
     
@@ -423,7 +426,7 @@ public class AnalisadorEstados extends AnalisadorLexico
         }
         else{
             System.out.println("Entrada não reconhecida");
-            throw(new ErroLexico(this.proxCaractere,DIGITO));
+            throw(new ErroLexico(this.proxCaractere,DIGITO,this.linha));
         }
     }
     public void n2(){
@@ -541,7 +544,7 @@ public class AnalisadorEstados extends AnalisadorLexico
             crt1();
         }else{
             System.out.println("Entrada não reconhecida");
-            throw(new ErroLexico(this.proxCaractere,ALFABETO));
+            throw(new ErroLexico(this.proxCaractere,ALFABETO,this.linha));
         }
     }
     public void crt1(){
@@ -550,7 +553,7 @@ public class AnalisadorEstados extends AnalisadorLexico
             crt2();
         }else{
             System.out.println("Entrada não reconhecida");
-            throw(new ErroLexico(this.proxCaractere,"'"));
+            throw(new ErroLexico(this.proxCaractere,"'",this.linha));
         }
     }
     public void crt2()
@@ -584,5 +587,10 @@ public class AnalisadorEstados extends AnalisadorLexico
             v0();
         }
     }
+
+    public int getLinha() {
+        return linha;
+    }
    
+    
 }

@@ -29,6 +29,10 @@ public class AnalisadorGramatica extends AnalisadorSintatico
 //                reconhece(Token.EOF);
 	}
         
+        /**
+         *  Verificador de comandos
+         * @author Thaylo
+         */
         public void listaComandos() 
         {
             if( proxTokenIs(Token.IF) || proxTokenIs(Token.WHILE) ||
@@ -123,7 +127,7 @@ public class AnalisadorGramatica extends AnalisadorSintatico
               listaComandos();
               reconhece(Token.FCH);
             } else  
-                throw new ErroSintatico( this.scanner.tokenReconhecido );
+                throw new ErroSintatico( this.scanner.tokenReconhecido, this.scanner.getLinha() );
             
                 
         }
@@ -138,7 +142,7 @@ public class AnalisadorGramatica extends AnalisadorSintatico
             }else if(proxTokenIs(Token.EOF)){
                 ;
             }else
-                throw new ErroSintatico( this.scanner.tokenReconhecido );
+                throw new ErroSintatico( this.scanner.tokenReconhecido,this.scanner.getLinha() );
         }
         
         public void bicaso() {
@@ -148,7 +152,7 @@ public class AnalisadorGramatica extends AnalisadorSintatico
             }else if(proxTokenIs(Token.EOF)){
                 ;
             }else
-                throw new ErroSintatico( this.scanner.tokenReconhecido );
+                throw new ErroSintatico( this.scanner.tokenReconhecido,this.scanner.getLinha() );
         }
         
         public void condicao() {
@@ -158,10 +162,10 @@ public class AnalisadorGramatica extends AnalisadorSintatico
             }else if(proxTokenIs(Token.NUMERO)){
                reconhece(Token.NUMERO);
             }else
-                throw new ErroSintatico( this.scanner.tokenReconhecido );
+                throw new ErroSintatico( this.scanner.tokenReconhecido, this.scanner.getLinha() );
         }
         
-        // necessita correção
+       
         public void atribuicao() 
         {
             if(proxTokenIs(Token.VARIAVEL))
@@ -171,7 +175,7 @@ public class AnalisadorGramatica extends AnalisadorSintatico
             }else if(proxTokenIs(Token.OP_UNARIO) || proxTokenIs(Token.OP_UN_BIN) ){
                cmdOP();
             }else
-                throw new ErroSintatico( this.scanner.tokenReconhecido );
+                throw new ErroSintatico( this.scanner.tokenReconhecido,this.scanner.getLinha() );
         }
         
         
@@ -186,7 +190,7 @@ public class AnalisadorGramatica extends AnalisadorSintatico
                         reconhece(Token.OP_UN_BIN);
                         expressao();
                     }else
-                throw new ErroSintatico( this.scanner.tokenReconhecido );
+                throw new ErroSintatico( this.scanner.tokenReconhecido, this.scanner.getLinha() );
             
         }
         
@@ -203,7 +207,7 @@ public class AnalisadorGramatica extends AnalisadorSintatico
                 reconhece( Token.OP_UNARIO);
                 System.out.println("Aqui");
             }else
-                throw new ErroSintatico( this.scanner.tokenReconhecido );
+                throw new ErroSintatico( this.scanner.tokenReconhecido, this.scanner.getLinha() );
         }
         
         
@@ -224,6 +228,7 @@ public class AnalisadorGramatica extends AnalisadorSintatico
               reconhece(Token.AP);
               expressao();
               reconhece(Token.FP);
+              subExpressao();
             }else if( proxTokenIs(Token.NUMERO) || proxTokenIs(Token.VARIAVEL) ||
                     proxTokenIs(Token.OP_UNARIO) || proxTokenIs(Token.OP_UN_BIN)  ){
               
@@ -238,10 +243,14 @@ public class AnalisadorGramatica extends AnalisadorSintatico
                 tkEsperados[3] = Token.VARIAVEL;
                 tkEsperados[4] = Token.OP_UNARIO;
                 tkEsperados[5] = Token.OP_UN_BIN;
-                throw new ErroSintatico( this.scanner.tokenReconhecido, tkEsperados );
+                throw new ErroSintatico( this.scanner.tokenReconhecido, tkEsperados, this.scanner.getLinha() );
             }
         }
         
+        /**
+         *  Instancia analisador gramatica utilizando o nome do arquivo
+         * @author Thaylo
+         * */
         public void cmdExp()
         {
              if(proxTokenIs(Token.VARIAVEL) )
@@ -257,6 +266,7 @@ public class AnalisadorGramatica extends AnalisadorSintatico
              }
         }
         
+       
         public void cmdSubExp()
         {
              if(proxTokenIs(Token.OP_UNARIO) )
@@ -268,6 +278,11 @@ public class AnalisadorGramatica extends AnalisadorSintatico
              }
         }
         
+        /**
+         *  Reconhece uma subexpressao 
+         * @author 
+         * 
+         * */
         public void subExpressao() {
             if( proxTokenIs(Token.OP_BINARIO)){
               reconhece(Token.OP_BINARIO);

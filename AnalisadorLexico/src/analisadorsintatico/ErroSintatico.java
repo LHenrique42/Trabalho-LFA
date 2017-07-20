@@ -9,16 +9,18 @@ public class ErroSintatico extends RuntimeException implements Constantes {
 	private Token tokenEncontrado;
 	private Token[] tokensEsperados;
         private String mensagem;
-
+        private int linha;
         /**
         * Instancia erro sintatico com vetor de  tokens esperador e token encontrado para mensagem
         * @author 
         */
-	public ErroSintatico(Token _tokenEncontrado, Token[] _tokensEsperados) {
+	public ErroSintatico(Token _tokenEncontrado, Token[] _tokensEsperados, int linha) {
 		this.tokenEncontrado = _tokenEncontrado;
 		this.tokensEsperados = _tokensEsperados;
                 this.mensagem = "";
+                this.linha = linha;
 	}
+      
 	
         /**
         * Instancia erro sintatico com token esperado e token encontrado para mensagem
@@ -36,11 +38,13 @@ public class ErroSintatico extends RuntimeException implements Constantes {
         * geral
         * @author 
         */
-        public ErroSintatico(Token _tokenEncontrado) {
+        public ErroSintatico(Token _tokenEncontrado, int linha) {
             this.tokenEncontrado = _tokenEncontrado;
             this.tokensEsperados = new Token[0];
             this.mensagem = "Outro comando";
-	}
+            this.linha = linha;
+        }
+        
         
         /**
         * Cria mensagem com tokens esperados para console
@@ -51,7 +55,12 @@ public class ErroSintatico extends RuntimeException implements Constantes {
             for(int i=0; i<this.tokensEsperados.length; i++)
 			this.mensagem += this.tokensEsperados[i] + " ";
 		return "token encontrado: "+this.tokenEncontrado+
-		       "\nera(m) esperado(s): "+ this.mensagem;
+		       "\nera(m) esperado(s): "+ this.mensagem + " na linha " + this.linha ;
 	}
+
+    public int getLinha() {
+        return linha;
+    }
+        
 }
 
